@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String createNewUser(UserDto dto) {
-//        userRepository.save(userMapper.to(dto));
+        userRepository.save(userMapper.to(dto));
         return "New user successfully created";
     }
 
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUserList() {
-        return null;
+        return  userRepository.findAllUserList();
     }
 
     @Override
