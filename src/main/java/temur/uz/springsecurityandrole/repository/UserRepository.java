@@ -10,9 +10,11 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    boolean existsByEmail(String email);
     @Query("select new temur.uz.springsecurityandrole.payload.UserDto(" +
             "u.firstName, u.lastName, u.email, u.password, u.enabled, " +
-            "u.tokenExpired) from User u join Role r r.user.id = u.")
+            "u.tokenExpired) from User u")
     List<UserDto> findAllUserList();
 
 }

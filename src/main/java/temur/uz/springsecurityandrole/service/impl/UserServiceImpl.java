@@ -1,7 +1,9 @@
 package temur.uz.springsecurityandrole.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import temur.uz.springsecurityandrole.entity.User;
 import temur.uz.springsecurityandrole.mapper.UserMapper;
 import temur.uz.springsecurityandrole.payload.UserDto;
 import temur.uz.springsecurityandrole.repository.UserRepository;
@@ -17,10 +19,20 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public String createNewUser(UserDto dto) {
-        userRepository.save(userMapper.to(dto));
-        return "New user successfully created";
+        if (!checkPassword(dto.getPassword())){
+            return "This is an error here, Parol uzunligi 4 tadan kam";
+        }
+        if (userRepository.existsByEmail(dto.getEmail())){
+            return "Already registered user";
+        }
+        User user = userMapper.to(dto);
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        userRepository.save(user);
+        return "User successfully created";
     }
 
     @Override
@@ -36,5 +48,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(Long id) {
         return null;
+    }
+
+    private boolean checkPassword(String password){
+        return password.length()>4;
     }
 }

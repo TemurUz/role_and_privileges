@@ -11,16 +11,16 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/role")
 public class RoleController {
 
     private final RoleService roleService;
 
-    @PostMapping("/role/add")
+    @PostMapping("add")
     public ResponseEntity<?> createRole(@RequestBody RoleDto dto){
         return ResponseEntity.ok(roleService.createRole(dto));
     }
-    @GetMapping("/roles")
+    @GetMapping("list")
     public ResponseEntity<List<Role>> getRoles(){
         return ResponseEntity.ok(roleService.getRoles());
     }
