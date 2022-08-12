@@ -13,3 +13,7 @@ spring:
   sql:
     init:
       continue-on-error: true
+jwt:
+  token:
+    secret: jwttemurmaliknomozov
+    validity: 864000000

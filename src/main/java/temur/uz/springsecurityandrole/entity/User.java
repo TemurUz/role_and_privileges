@@ -1,11 +1,12 @@
 package temur.uz.springsecurityandrole.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import temur.uz.springsecurityandrole.model.enamuration.Status;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -15,11 +16,13 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
     private String lastName;
+    @NotNull
+    private String userName;
     @Column(unique = true)
     private String email;
     private String password;
