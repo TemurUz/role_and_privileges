@@ -17,6 +17,11 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
+    /**
+     * create user
+     * @param employee
+     * @return Employee
+     */
     @PostMapping("/employees")
     public ResponseEntity create(@RequestBody Employee employee){
         Employee employee1 = employeeService.save(employee);
